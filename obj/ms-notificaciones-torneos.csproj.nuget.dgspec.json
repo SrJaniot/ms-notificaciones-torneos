@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\esteb\\ProyectoTorneos\\Backend\\ms-notificaciones-torneos\\ms-notificaciones-torneos.csproj": {}
+    "C:\\Users\\esteb\\ProyectoTorneos\\Backend\\ms-notificaciones-torneos\\ms-notificaciones-torneos.csproj": {}
   },
   "projects": {
-    "c:\\Users\\esteb\\ProyectoTorneos\\Backend\\ms-notificaciones-torneos\\ms-notificaciones-torneos.csproj": {
+    "C:\\Users\\esteb\\ProyectoTorneos\\Backend\\ms-notificaciones-torneos\\ms-notificaciones-torneos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\esteb\\ProyectoTorneos\\Backend\\ms-notificaciones-torneos\\ms-notificaciones-torneos.csproj",
+        "projectUniqueName": "C:\\Users\\esteb\\ProyectoTorneos\\Backend\\ms-notificaciones-torneos\\ms-notificaciones-torneos.csproj",
         "projectName": "ms-notificaciones-torneos",
-        "projectPath": "c:\\Users\\esteb\\ProyectoTorneos\\Backend\\ms-notificaciones-torneos\\ms-notificaciones-torneos.csproj",
+        "projectPath": "C:\\Users\\esteb\\ProyectoTorneos\\Backend\\ms-notificaciones-torneos\\ms-notificaciones-torneos.csproj",
         "packagesPath": "C:\\Users\\esteb\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\esteb\\ProyectoTorneos\\Backend\\ms-notificaciones-torneos\\obj\\",
+        "outputPath": "C:\\Users\\esteb\\ProyectoTorneos\\Backend\\ms-notificaciones-torneos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,6 +45,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "DotNetEnv": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.15, )"
