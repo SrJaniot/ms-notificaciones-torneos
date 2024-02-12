@@ -32,11 +32,12 @@ public class NotificacionesController : ControllerBase
         var htmlContent = datos.contenidoCorreo;
         var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
         //ajustes para plantilla de correo
+        var linkhash = Environment.GetEnvironmentVariable("LINK_INICIO") + datos.hash;
         msg.SetTemplateId("d-73fe62492fd94da392e9a7fce793adc2");
         msg.SetTemplateData(new{
             //variables del html de la plantilla recordar que deben venir en la variable datos es decir si en el html de la plantilla se llama nombre, en el modelo debe llamarse nombre
             nombre=datos.nombreDestino,
-            Link_inicio=Environment.GetEnvironmentVariable("LINK_INICIO")
+            Link_inicio=linkhash
         });
 
         var response = await client.SendEmailAsync(msg);
