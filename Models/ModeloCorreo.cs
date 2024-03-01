@@ -8,5 +8,8 @@ namespace ms_notificaciones_torneos.Models
         public string? contenidoCorreo { get; set; }
         public string? codigo2fa { get; set; }
         public string? hash { get; set; }
+        public string? nombreLiderEquipo { get; set; }
+        public string? nombreEquipo { get; set; }
+        public string? idEquipo { get; set; }
     }
 }
