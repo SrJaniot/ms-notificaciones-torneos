@@ -11,5 +11,10 @@ namespace ms_notificaciones_torneos.Models
         public string? nombreLiderEquipo { get; set; }
         public string? nombreEquipo { get; set; }
         public string? idEquipo { get; set; }
+        public string? id_evento { get; set; }
+        public string? id_datos_personales { get; set; }
+        public string? hash_validacion { get; set; }
+
+
     }
 }

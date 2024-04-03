@@ -165,6 +165,91 @@ public class NotificacionesController : ControllerBase
         }
 
     }
+    //METODO PARA ENVIAR CORREO DE tikete QR---------------------------------------------------------------------------------------------------------------
+    //variables del html: nombre, id_evento, id_datospersonales, hash_validacion, 
+    [Route("correo-tiketIngresoEvento_qr")]
+    [HttpPost(Name = "correo")]
+    public async Task<IActionResult> EnviarCorreoTiketIngresoEvento_QR(ModeloCorreo datos)
+    {
+        // Console.WriteLine("entre a correo 2fa");
+        var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+        var client = new SendGridClient(apiKey);
+        var from = new EmailAddress(Environment.GetEnvironmentVariable("EMAIL_FROM"), Environment.GetEnvironmentVariable("NAME_FROM"));
+        var subject = datos.asuntoCorreo;
+        var to = new EmailAddress(datos.correoDestino,datos.nombreDestino);
+        var plainTextContent = "plain text content";
+        var htmlContent = datos.contenidoCorreo;
+        var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+        //ajustes para plantilla de correo
+        //AJUSTAR LINK DE QR A ESTE FORMATO http://127.0.0.1:3001/generateQRCodePDF_GET?id_evento=0&id_datos_personales=0&hash_validacion=ASDASD
+        
+        var link_codigoQR_PDF = Environment.GetEnvironmentVariable("LINK_MS_LOGICA") + "generateQRCodePDF_GET?id_evento=" +  datos.id_evento + "&id_datos_personales=" + datos.id_datos_personales + "&hash_validacion=" + datos.hash_validacion;
+
+        msg.SetTemplateId("d-2e37b2dfbcfd4c2d9d2ae8312b80fbbf");
+        msg.SetTemplateData(new{
+            //variables del html de la plantilla recordar que deben venir en la variable datos es decir si en el html de la plantilla se llama nombre, en el modelo debe llamarse nombre
+            nombre=datos.nombreDestino,
+            link_codigoQR_PDF=link_codigoQR_PDF,            
+        });
+
+        var response = await client.SendEmailAsync(msg);
+
+        
+        if(response.StatusCode == System.Net.HttpStatusCode.Accepted)
+        {
+            return Ok("Correo enviado a "+datos.correoDestino + " exitosamente");
+        }
+        else
+        {
+            return BadRequest("Error al enviar el correo a "+ datos.correoDestino );
+        }
+
+    }
+
+    //METODO PARA ENVIAR CORREO DE tikete QR---------------------------------------------------------------------------------------------------------------
+    //variables del html: nombre, id_evento, id_datospersonales, hash_validacion, 
+    [Route("correo-tiketIngresoEvento_barras")]
+    [HttpPost(Name = "correo")]
+    public async Task<IActionResult> EnviarCorreoTiketIngresoEvento_Barras(ModeloCorreo datos)
+    {
+        // Console.WriteLine("entre a correo 2fa");
+        var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+        var client = new SendGridClient(apiKey);
+        var from = new EmailAddress(Environment.GetEnvironmentVariable("EMAIL_FROM"), Environment.GetEnvironmentVariable("NAME_FROM"));
+        var subject = datos.asuntoCorreo;
+        var to = new EmailAddress(datos.correoDestino,datos.nombreDestino);
+        var plainTextContent = "plain text content";
+        var htmlContent = datos.contenidoCorreo;
+        var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+        //ajustes para plantilla de correo
+        //AJUSTAR LINK DE QR A ESTE FORMATO http://127.0.0.1:3001/generateBarcodedownloadPDF_GET?id_evento=0&id_datos_personales=0&hash_validacion=ASDASD
+        
+        var link_codigoQR_PDF = Environment.GetEnvironmentVariable("LINK_MS_LOGICA") + "generateBarcodedownloadPDF_GET?id_evento=" +  datos.id_evento + "&id_datos_personales=" + datos.id_datos_personales + "&hash_validacion=" + datos.hash_validacion;
+
+        msg.SetTemplateId("d-2e37b2dfbcfd4c2d9d2ae8312b80fbbf");
+        msg.SetTemplateData(new{
+            //variables del html de la plantilla recordar que deben venir en la variable datos es decir si en el html de la plantilla se llama nombre, en el modelo debe llamarse nombre
+            nombre=datos.nombreDestino,
+            link_codigoQR_PDF=link_codigoQR_PDF,            
+        });
+
+        var response = await client.SendEmailAsync(msg);
+
+        
+        if(response.StatusCode == System.Net.HttpStatusCode.Accepted)
+        {
+            return Ok("Correo enviado a "+datos.correoDestino + " exitosamente");
+        }
+        else
+        {
+            return BadRequest("Error al enviar el correo a "+ datos.correoDestino );
+        }
+
+    }
+
+
+
+
 
 
 
