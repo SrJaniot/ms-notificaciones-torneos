@@ -182,8 +182,26 @@ public class NotificacionesController : ControllerBase
         var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
         //ajustes para plantilla de correo
         //AJUSTAR LINK DE QR A ESTE FORMATO http://127.0.0.1:3001/generateQRCodePDF_GET?id_evento=0&id_datos_personales=0&hash_validacion=ASDASD
-        
-        var link_codigoQR_PDF = Environment.GetEnvironmentVariable("LINK_MS_LOGICA") + "generateQRCodePDF_GET?id_evento=" +  datos.id_evento + "&id_datos_personales=" + datos.id_datos_personales + "&hash_validacion=" + datos.hash_validacion;
+        //preparar el nombre del usuario para mandarlo por url, es decir cuando encuetre un espacio lo cambia por %20
+        Console.WriteLine("id_evento: "+datos.id_evento);   
+        Console.WriteLine("id_datos_personales: "+datos.id_datos_personales);
+        Console.WriteLine("hash_validacion: "+datos.hash_validacion);
+        Console.WriteLine("nombreDestino: "+datos.nombreDestino);
+        Console.WriteLine("nom_evento: "+datos.nom_evento);
+        Console.WriteLine("fecha_evento: "+datos.fecha_evento);
+        Console.WriteLine("hora_inicio: "+datos.hora_inicio);
+        Console.WriteLine("hora_fin: "+datos.hora_fin);
+
+
+
+
+        var nombredestino_con_espacios = datos.nombreDestino!.Replace(" ", "%20");
+        Console.WriteLine("nombre destino con espacios: "+nombredestino_con_espacios);
+        var nombre_evento_con_espacios = datos.nom_evento!.Replace(" ", "%20");
+        Console.WriteLine("nombre evento con espacios: "+nombre_evento_con_espacios);
+
+
+        var link_codigoQR_PDF = Environment.GetEnvironmentVariable("LINK_MS_LOGICA") + "generateQRCodePDF_GET?id_evento=" +  datos.id_evento + "&id_datos_personales=" + datos.id_datos_personales + "&hash_validacion=" + datos.hash_validacion +"&nombreDestino="+nombredestino_con_espacios+ "&nom_evento=" + nombre_evento_con_espacios + "&fecha_evento=" + datos.fecha_evento + "&hora_inicio=" + datos.hora_inicio + "&hora_fin=" + datos.hora_fin;
 
         msg.SetTemplateId("d-2e37b2dfbcfd4c2d9d2ae8312b80fbbf");
         msg.SetTemplateData(new{
@@ -224,7 +242,12 @@ public class NotificacionesController : ControllerBase
         //ajustes para plantilla de correo
         //AJUSTAR LINK DE QR A ESTE FORMATO http://127.0.0.1:3001/generateBarcodedownloadPDF_GET?id_evento=0&id_datos_personales=0&hash_validacion=ASDASD
         
-        var link_codigoQR_PDF = Environment.GetEnvironmentVariable("LINK_MS_LOGICA") + "generateBarcodedownloadPDF_GET?id_evento=" +  datos.id_evento + "&id_datos_personales=" + datos.id_datos_personales + "&hash_validacion=" + datos.hash_validacion;
+        //preparar el nombre del usuario para mandarlo por url, es decir cuando encuetre un espacio lo cambia por %20
+        var nombredestino_con_espacios = datos.nombreDestino!.Replace(" ", "%20");
+        var nombre_evento_con_espacios = datos.nom_evento!.Replace(" ", "%20");
+
+
+        var link_codigoQR_PDF = Environment.GetEnvironmentVariable("LINK_MS_LOGICA") + "generateBarcodedownloadPDF_GET?id_evento=" +  datos.id_evento + "&id_datos_personales=" + datos.id_datos_personales + "&hash_validacion=" + datos.hash_validacion +"&nombreDestino="+nombredestino_con_espacios+ "&nom_evento=" + nombre_evento_con_espacios + "&fecha_evento=" + datos.fecha_evento + "&hora_inicio=" + datos.hora_inicio + "&hora_fin=" + datos.hora_fin;
 
         msg.SetTemplateId("d-2e37b2dfbcfd4c2d9d2ae8312b80fbbf");
         msg.SetTemplateData(new{

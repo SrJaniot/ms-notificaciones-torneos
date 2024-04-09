@@ -14,6 +14,13 @@ namespace ms_notificaciones_torneos.Models
         public string? id_evento { get; set; }
         public string? id_datos_personales { get; set; }
         public string? hash_validacion { get; set; }
+        public string? nom_evento { get; set; }
+        public string? fecha_evento { get; set; }
+        public string? hora_inicio { get; set; }
+        public string? hora_fin { get; set; }
+
+
+
 
 
     }
